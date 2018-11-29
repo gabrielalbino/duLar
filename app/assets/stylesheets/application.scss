@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'Redressed';
+    src: url('redressed-webfont.woff2') format('woff2'),
+         url('redressed-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import 'bootstrap';
+@import 'categories';
+@import 'home';
+
+body, html{
+    padding: 0;
+    margin: 0;
+}
+
+.app-nav{
+    height: 64px;
+    padding: 0;
+    margin: 0;
+    background: #C82400;
+    display: flex;
+    li{
+        justify-content: space-between;
+        align-items: center;
+        flex: 1;
+        display: flex;
+        &:not(:last-child){
+            border-right: 1px solid black;
+        }
+        &:hover{
+            background: #E87A12;
+        }
+        a{
+            text-align: center;
+            width: 100%;
+            text-decoration: none;
+            color: #fff;
+            line-height: 100%;
+            vertical-align: middle;
+            &.nav-main{
+                font-family: 'Redressed';
+                font-style: normal;
+                font-weight: normal;
+                line-height: normal;
+                font-size: 36px;
+            }
+            &.nav-item{
+                font-family: 'Source Sans Pro', sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                line-height: normal;
+                font-size: 14px;
+                text-align: center;
+            }
+        }
+    }
+}   
+.container-fluid.index{
+}

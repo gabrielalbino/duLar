@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DuLar</title>
+    <title>Du Lar</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,20 @@
   </head>
 
   <body>
+    <ul class = "app-nav">
+      <li><%=link_to 'DuLar', '/', class: 'nav-main'%></li>
+      <li><%=link_to 'Fórum', categories_path, class: 'nav-item'%></li>
+      <li><%=link_to 'Pratos Principais', Category.find_by_name("Pratos Principais"), class: 'nav-item'%></li>
+      <li><%=link_to 'Entradas', Category.find_by_name("Entradas"), class: 'nav-item'%></li>
+      <li><%=link_to 'Sobremesas', Category.find_by_name("Sobremesas"), class: 'nav-item'%></li>
+      <li><%=link_to 'Perguntas', Category.find_by_name("Perguntas"), class: 'nav-item'%></li>
+      <li><%=link_to 'Registre-se', '#', class: 'nav-item'%></li>
+      <li><%=link_to 'Login', '#', class: 'nav-item'%></li>
+    </ul>
+    <div class = "container-fluid index">
+
+    </div>
+
     <%= yield %>
   </body>
 </html>
