@@ -6,5 +6,11 @@ class CreateCategories < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+
+    Category.create(name: 'Pratos Principais', icon: 'prato-principal.svg')
+    Category.create(name: 'Entradas', icon: 'entrada.svg')
+    Category.create(name: 'Sobremesas', icon: 'sobremesa.svg')
+    Category.create(name: 'Perguntas', icon: 'pergunta.svg')
+
   end
 end
