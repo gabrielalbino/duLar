@@ -10,6 +10,7 @@
 @import 'bootstrap';
 @import 'categories';
 @import 'home';
+@import 'typography';
 
 body, html{
     padding: 0;
@@ -59,4 +60,5 @@ body, html{
     }
 }   
 .container-fluid.index{
+    height: calc(100vh - 64px);
 }

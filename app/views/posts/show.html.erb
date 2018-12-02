@@ -1,0 +1,76 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Ingredients:</strong>
+  <%= @post.ingredients %>
+</p>
+
+<p>
+  <strong>Prepare:</strong>
+  <%= @post.prepare %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= @post.picture %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @post.user %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @post.category %>
+</p>
+
+<p>Comentários</p>  
+<% @comments.each do |comment| %>
+  <% @author = User.where(id: comment.user_id)[0] %>
+  <div>
+    <%= @author.email %>
+    <%= comment.content %>
+  </div>
+<% end %>
+
+
+<%= form_for(@comment) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :post_id, value: @post.id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

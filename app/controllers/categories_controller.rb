@@ -10,6 +10,11 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    if params[:id] != 4
+      @posts = Post.where(category_id: params[:id])
+    else
+      @posts = Question.all
+    end
   end
 
   # GET /categories/new
