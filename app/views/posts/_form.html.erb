@@ -10,37 +10,36 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class = "row">
+    <div class = "col-4 offset-1">
+      <%= f.text_field :title, class: 'title', placeholder: "Título da receita" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :ingredients %>
-    <%= f.text_area :ingredients %>
+  <div class = "row mt-32">
+    <div class = "col-4 offset-1">
+      <p>Ingredientes</p>
+      <%= f.text_area :ingredients, class: 'ingredients' %>
+    </div>
+    <div class = "col-4">
+      <p>Preparo</p>
+      <%= f.text_area :prepare, class: 'prepare' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :prepare %>
-    <%= f.text_area :prepare %>
-  </div>
-
-  <div class="field">
-    <%= f.label :picture %>
+  <div class = "row mt-32">
+    <div class = "col">
+    <p>Imagem da receita</p>
      <%= f.file_field :picture %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.hidden_field :user_id, value: current_user.id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :category_id %>
+  <div class = "row mt-32">
+    <div class = "col">
+    <%= f.label 'Categoria' %>
     <%= f.select :category_id, Category.where.not(id: 4).collect { |category| [category.name, category.id] } %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <%= f.submit 'ENVIAR', class: 'btn btn-danger' %>
+  
 <% end %>

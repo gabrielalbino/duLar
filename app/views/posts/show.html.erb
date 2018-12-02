@@ -1,76 +1,72 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Ingredients:</strong>
-  <%= @post.ingredients %>
-</p>
-
-<p>
-  <strong>Prepare:</strong>
-  <%= @post.prepare %>
-</p>
-
-<p>
-  <strong>Picture:</strong>
-  <%= @post.picture %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @post.user %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @post.category %>
-</p>
-
-<p>Comentários</p>  
-<% @comments.each do |comment| %>
-  <% @author = User.where(id: comment.user_id)[0] %>
-  <div>
-    <%= @author.email %>
-    <%= comment.content %>
+<div class = "post-wrapper">
+  <h1><%= @post.title %></h1>
+  <div class = "post-content row">
+    <div class = "col-2 picture-area user">
+      <%= image_tag(@post.user.avatar.url, class:'avatar-picture') unless @post.user.avatar.blank? %>
+      <p>Chef <%=@post.user.nickname%></p>
+      <p class = "date"><%=@post.created_at.to_date.strftime "%d/%m/%Y" %></p> 
+    </div>
+    <div class = "col-3 picture-area">
+      <%= image_tag(@post.picture.url, class:'reciple-picture') unless @post.picture.blank? %>
+    </div>
+    <div class = "col-2 text-area">
+      <p class = "header"> Ingredientes </p>
+      <p><%= @post.ingredients %></p>
+    </div>
+    <div class = "col-4 text-area">
+      <p class = "header"> Preparo </p>
+      <p><%= @post.prepare %></p>
+    </div>
   </div>
-<% end %>
-
-<% if current_user != nil %>
-  <%= form_for(@comment) do |f| %>
-    <% if @comment.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-        <ul>
-        <% @comment.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
+  <div class = "comments-content">
+    <p class = "divisor">Comentários</p>  
+    <% @comments.each do |comment| %>
+      <div class = "row">
+        <div class = "col-2 picture-area user">
+          <%= image_tag(comment.user.avatar.url, class:'avatar-picture') unless comment.user.avatar.blank? %>
+          <p>Chef <%=comment.user.nickname%></p>
+          <p class = "date"><%=comment.created_at.to_date.strftime "%d/%m/%Y" %></p> 
+        </div>
+        <div class = "col">
+          <p><%= comment.content %></p>
+        </div>
       </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :content %>
-      <%= f.text_area :content %>
-    </div>
+    <% if current_user != nil %>
+    <div class = "row">
+      <div class = "col-9 offset-2">
+        <%= form_for(@comment) do |f| %>
+          <% if @comment.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-    <div class="field">
-      <%= f.hidden_field :user_id, value: current_user.id %>
-    </div>
+              <ul>
+              <% @comment.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-    <div class="field">
-      <%= f.hidden_field :post_id, value: @post.id %>
-    </div>
+          <div class="field">
+            <%= f.text_area :content, placeholder: 'Escreva um comentário...' %>
+          </div>
 
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  <% end %>
-<% end %>
+          <div class="field">
+            <%= f.hidden_field :user_id, value: current_user.id %>
+          </div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+          <div class="field">
+            <%= f.hidden_field :post_id, value: @post.id %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit 'ENVIAR' , class: 'btn btn-danger' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

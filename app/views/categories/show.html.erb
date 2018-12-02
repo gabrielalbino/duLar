@@ -1,9 +1,31 @@
-<p id="notice"><%= notice %></p>
-<% @posts.each do |post| %>
-  <div>
-    <% @author = User.where(id: post.user_id)[0]%>
-    <%= link_to post.title, post %>
-    <%= link_to image_tag(post.picture), post %>
-    <%= @author.email %>
+<div class = "category-show-wrapper">
+  <div class = "top-content">
+    <h1><%=@category.name%></h1>
+    <% if @category.id != 4%>
+      <%= link_to 'Enviar nova receita',new_post_path %>
+    <% else %>
+      <%= link_to 'Enviar nova dúvida',new_question_path %>
+    <% end %>
   </div>
-<% end %>
+  <% @contador = 0%>
+  <% @posts.each do |post| %>
+    <%if @contador%2 == 0 %>
+      <div class = "row">
+    <% end %>
+    <div class = "col-4 offset-1 reciple-item">
+      <% @author = User.where(id: post.user_id)[0]%>
+      <% @answers = Comment.where(post_id: post.id).count %>
+      <%= link_to image_tag(@author.avatar), post, class:'user-avatar' %>
+      <div class = "reciple-details">
+        <%= link_to post.title, post, class: 'post-title' %>
+        <p> Respostas: <%= @answers %> </p>
+        <p class = "author"><%= 'Criado Por: ' + @author.nickname %></p>
+        <p class = "date"><%=post.created_at.to_date.strftime "%d/%m/%Y" %></p> 
+      </div>
+    </div>
+    <%@contador += 1 %>
+    <%if @contador%2 == 0 %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
