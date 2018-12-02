@@ -16,13 +16,17 @@
       <li><%=link_to 'Entradas', Category.find_by_name("Entradas"), class: 'nav-item'%></li>
       <li><%=link_to 'Sobremesas', Category.find_by_name("Sobremesas"), class: 'nav-item'%></li>
       <li><%=link_to 'Perguntas', Category.find_by_name("Perguntas"), class: 'nav-item'%></li>
-      <li><%=link_to 'Registre-se', '#', class: 'nav-item'%></li>
-      <li><%=link_to 'Login', '#', class: 'nav-item'%></li>
+      <% if !user_signed_in?%>
+      <li><%=link_to 'Registre-se', new_user_registration_path, class: 'nav-item'%></li>
+      <li><%=link_to 'Login', new_user_session_path, class: 'nav-item'%></li>
+      <% else %>
+      <li><%=link_to 'Perfil', edit_user_registration_path, class: 'nav-item'%></li>
+      <li><%=link_to 'Sair', destroy_user_session_path, method: :delete, class: 'nav-item'%></li>
+      <% end %>
     </ul>
     <div class = "container-fluid index">
-
+      <%= yield %>
     </div>
 
-    <%= yield %>
   </body>
 </html>
