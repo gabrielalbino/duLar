@@ -5,11 +5,20 @@
                 <%= image_tag("coffee-filter.svg") %>
                 <h1>Recentes</h1>
             </li>
-            <li>item</li>
+            <%if @lastsPosts.count > 0%>
+                <% @lastsPosts.each do |post| %>
+                    <li>    
+                        <%= link_to post.title, post %> 
+                    </li>
+                <% end %>
+            <% else %>
+                <p>Não há Posts recentes.</p>
+            <% end %>
         </ul>
     </div>
     <div class = "col center-content">
-
+        <%= image_tag("duLar.svg") %>
+        <h1>Receitas caseiras</br>De pessoas, Para pessoas</h1>
     </div>
     <div class = "col-3 right-content">
         <ul>
@@ -17,7 +26,15 @@
                 <%= image_tag("coffee-cup.svg") %>
                 <h1>Quentes</h1>
             </li>
-            <li>item</li>
+            <% if @hotPosts.count > 0 %>
+                <% @hotPosts.each do |post| %>
+                    <li>    
+                        <%= link_to post.title, post %> 
+                    </li>
+                <% end %>
+            <% else %>
+                <p>Não há Posts ativos.</p>
+            <% end %>
         </ul>
     </div>
 </div>
